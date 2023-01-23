@@ -83,7 +83,7 @@ class Session():
         self.get_colors()
 
     def get_colors(self):
-        rgba_img = np.array(self.image.convert(matrix = "RGB"), dtype = np.uint8)
+        rgba_img = np.array(self.image.convert(mode = "RGB"), dtype = np.uint8)
 
         colors = set()
 
