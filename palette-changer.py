@@ -53,9 +53,15 @@ class Session():
         pass
 
     def choose_image(self):
+        newImageButton.configure(state = "disabled")
+        self.buttons = {}
+        self.buttonColors = {}
+
         self.filename = filedialog.askopenfilename(title = "Open Image", filetypes = (("PNG", "*.png"), ("GIF", "*.gif")))
-        self.image = Image.open(self.filename)
-        self.show_image()
+
+        if self.filename:
+            self.image = Image.open(self.filename)
+            self.show_image()
         
     
     def show_image(self):
@@ -145,16 +151,17 @@ def hex_to_rgb(hex):
 
 # GUI
 
-root = tk.Tk()
-root.title("Palette Changer")
-icon = tk.PhotoImage(file = os.path.join(sys.path[0], "palette-changer.ico"))
-root.iconphoto(False, icon)
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.title("Palette Changer")
+    #icon = tk.PhotoImage(file = os.path.join(sys.path[0], "palette-changer.ico"))
+    #root.iconphoto(False, icon)
+    root.resizable(False, False)
 
-canvas = tk.Canvas(root, width = WIDTH_WINDOW, height = HEIGHT_WINDOW)
+    canvas = tk.Canvas(root, width = WIDTH_WINDOW, height = HEIGHT_WINDOW)
 
-newImageButton = tk.Button(root, text = "New Image", command = new_session)
-canvas.create_window(10, 10, window = newImageButton, anchor = "nw")
+    newImageButton = tk.Button(root, text = "New Image", command = new_session)
+    canvas.create_window(10, 10, window = newImageButton, anchor = "nw")
 
-
-canvas.pack()
-root.mainloop()
+    canvas.pack()
+    root.mainloop()
